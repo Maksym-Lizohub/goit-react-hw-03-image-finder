@@ -2,14 +2,12 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 
 const ImageGalleryItem = ({ image, onImageClick }) => (
-  <li
-    className="ImageGalleryItem"
-    onClick={() => onImageClick(image.largeImageURL)}
-  >
+  <li className="ImageGalleryItem" onClick={() => onImageClick(image)}>
     <img
       src={image.webformatURL}
       alt={image.tags}
       className="ImageGalleryItem-image"
+      loading="lazy"
     />
   </li>
 );

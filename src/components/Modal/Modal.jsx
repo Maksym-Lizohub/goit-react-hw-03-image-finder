@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 class Modal extends Component {
   static propTypes = {
-    image: PropTypes.string.isRequired,
+    image: PropTypes.object.isRequired,
     onCloseModal: PropTypes.func.isRequired,
   };
 
@@ -31,9 +31,12 @@ class Modal extends Component {
     const { image } = this.props;
     return (
       <div className="Overlay" onClick={this.onBackdropClick}>
-        <div className="Modal">
-          <img src={image} alt={image.tags} /> {/* to do alt */}
-        </div>
+        <img
+          src={image.largeImageURL}
+          alt={image.tags}
+          className="Modal"
+          loading="lazy"
+        />
       </div>
     );
   };

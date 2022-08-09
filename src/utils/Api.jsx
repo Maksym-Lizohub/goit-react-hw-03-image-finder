@@ -25,4 +25,5 @@ const getImages = (query, page) => {
     );
 };
 
+// eslint-disable-next-line
 export default { getImages };
