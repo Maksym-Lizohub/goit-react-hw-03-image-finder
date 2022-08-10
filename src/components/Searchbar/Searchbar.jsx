@@ -1,51 +1,62 @@
-import { PropTypes } from 'prop-types';
-import React, { Component } from 'react';
+import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 
-class Searchbar extends Component {
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  };
-
+class Searchbar extends PureComponent {
   state = {
-    query: '',
+    searchQuery: '',
   };
 
-  handleInput = e => {
-    this.setState({ query: e.target.value });
+  handleInput = event => {
+    this.setState({
+      searchQuery: event.currentTarget.value.toLowerCase().trim(),
+    });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    if (!this.state.query) {
-      alert('Empty query');
+  handleSubmit = event => {
+    event.preventDefault();
+    const { searchQuery } = this.state;
+    const { onSubmit } = this.props;
+
+    if (searchQuery.trim() === '') {
+      toast.warn('Please enter search query');
       return;
     }
-    this.props.onSubmit(this.state.query);
-    this.setState({ query: '' });
+    onSubmit(searchQuery);
+    this.reset();
   };
 
-  render = () => {
+  reset = () => {
+    this.setState({ searchQuery: '' });
+  };
+
+  render() {
+    const { handleInput, handleSubmit } = this;
+    const { searchQuery } = this.state;
+
     return (
       <header className="Searchbar">
-        <form className="SearchForm" onSubmit={this.handleSubmit}>
+        <form className="SearchForm" onSubmit={handleSubmit}>
           <button type="submit" className="SearchForm-button">
             <SearchIcon />
+            <p className="SearchForm-button-label">Search</p>
           </button>
-
           <input
             className="SearchForm-input"
             type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            onChange={this.handleInput}
-            value={this.state.query}
+            value={searchQuery}
+            onChange={handleInput}
+            placeholder="Search images"
           />
         </form>
       </header>
     );
-  };
+  }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default Searchbar;

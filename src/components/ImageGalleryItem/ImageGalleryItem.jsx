@@ -1,11 +1,11 @@
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
-const ImageGalleryItem = ({ image, onImageClick }) => (
-  <li className="ImageGalleryItem" onClick={() => onImageClick(image)}>
+const ImageGalleryItem = ({ cardUrl, alt, onClick }) => (
+  <li className="ImageGalleryItem" onClick={onClick}>
     <img
-      src={image.webformatURL}
-      alt={image.tags}
+      src={cardUrl}
+      alt={alt}
       className="ImageGalleryItem-image"
       loading="lazy"
     />
@@ -13,12 +13,9 @@ const ImageGalleryItem = ({ image, onImageClick }) => (
 );
 
 ImageGalleryItem.propTypes = {
-  image: PropTypes.shape({
-    webformatURL: PropTypes.string.isRequired,
-    largeImageURL: PropTypes.string.isRequired,
-    tags: PropTypes.string.isRequired,
-  }),
-  onImageClick: PropTypes.func.isRequired,
+  cardUrl: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ImageGalleryItem;
