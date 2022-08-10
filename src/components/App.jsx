@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
-import { ToastContainer, toast } from 'npm install --save react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
