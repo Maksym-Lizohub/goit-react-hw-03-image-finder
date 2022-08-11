@@ -26,9 +26,7 @@ class App extends Component {
 
     if (prevState.searchQuery !== searchQuery) {
       this.setState({
-        images: [],
         status: 'pending',
-        page: 1,
       });
       this.getImages();
     }
